@@ -5,6 +5,8 @@
 
 `default_nettype none
 
+/* verilator lint_off PINCONNECTEMPTY */
+
 module tt_um_urish_simon (
     input  wire [7:0] ui_in,    // Dedicated inputs
     output wire [7:0] uo_out,   // Dedicated outputs
