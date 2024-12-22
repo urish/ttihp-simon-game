@@ -13,7 +13,7 @@
 
   "//": "PL_TARGET_DENSITY_PCT - You can increase this if Global Placement fails with error GPL-0302.",
   "//": "Users have reported that values up to 80 worked well for them.",
-  "PL_TARGET_DENSITY_PCT": 80,
+  "PL_TARGET_DENSITY_PCT": 83,
 
   "//": "CLOCK_PERIOD - Increase this in case you are getting setup time violations.",
   "//": "The value is in nanoseconds, so 20ns == 50MHz.",
@@ -29,7 +29,7 @@
 
   "//": "If you need a custom clock configuration, read the following documentation first:",
   "//": "https://tinytapeout.com/faq/#how-can-i-map-an-additional-external-clock-to-one-of-the-gpios",
-  "CLOCK_PORT": "clk",
+  "CLOCK_PORT": "clk_simon",
 
   "//": "Configuration docs: https://openlane.readthedocs.io/en/latest/reference/configuration.html",
 

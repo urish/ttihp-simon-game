@@ -16,7 +16,9 @@ project:
   # List your project's source files here. Source files must be in ./src and you must list each source file separately, one per line:
   source_files:
     - "galois_lfsr.v"
+    - "inverter.v"
     - "project.v"
+    - "ring_osc.v"
     - "score.v"
     - "simon.v"
     - "sound_gen.v"
@@ -31,7 +33,7 @@ pinout:
   ui[4]: "seginv"
   ui[5]: ""
   ui[6]: ""
-  ui[7]: ""
+  ui[7]: "clk_sel"
 
   # Outputs
   uo[0]: "led1"
@@ -41,7 +43,7 @@ pinout:
   uo[4]: "speaker"
   uo[5]: "dig1"
   uo[6]: "dig2"
-  uo[7]: ""
+  uo[7]: "clk_internal"
 
   # Bidirectional pins
   uio[0]: "seg_a"

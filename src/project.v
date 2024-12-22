@@ -20,15 +20,27 @@ module tt_um_urish_simon (
   wire [6:0] segments;
   wire [1:0] segment_digits;
   wire sound;
+  wire clk_sel = ui_in[7];
+  wire clk_internal;
+  wire clk_simon = clk_sel ? clk_internal : clk;
+  wire clk_internal_out = clk_sel ? clk_internal : 0;
 
-  assign uo_out  = {1'b0, segment_digits, sound, led};
+  assign uo_out  = {clk_internal_out, segment_digits, sound, led};
   assign uio_out = {1'b0, segments};
   assign uio_oe  = 8'b0111_1111;
 
+  ring_osc #(
+      .CHAIN_LENGTH(13),
+      .DIVIDER_BITS(13)  // For ~62.5 KHz output, determined by measuring tt05's tt_um_urish_ringosc_cnt
+  ) ring_osc (
+      .clk_out(),
+      .clk_out_div(clk_internal)
+  );
+
   simon simon1 (
-      .clk   (clk),
+      .clk   (clk_simon),
       .rst   (!rst_n),
-      .ticks_per_milli (16'd50),
+      .ticks_per_milli (clk_sel ? 16'd62 : 16'd50),
       .btn   (ui_in[3:0]),
       .led   (led),
       .segments(segments),
