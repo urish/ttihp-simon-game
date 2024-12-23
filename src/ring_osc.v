@@ -26,14 +26,13 @@ module ring_osc #(
       .out(inv_out)
   );
 
-  reg [DIVIDER_BITS-1:0] divider;
+  wire [DIVIDER_BITS-1:0] divider;
   assign clk_out_div = divider[DIVIDER_BITS-1];
-  always @(posedge clk_out) begin
-    if (divider == 0) begin
-      divider <= (1 << DIVIDER_BITS) - 1;
-    end else begin
-      divider <= divider - 1;
-    end
-  end
+
+  clock_divider_stage dividers[DIVIDER_BITS-1:0] (
+      .clk({divider[DIVIDER_BITS-2:0], clk_out}),
+      .in (divider),
+      .out(divider)
+  );
 
 endmodule
