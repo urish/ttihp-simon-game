@@ -5,8 +5,6 @@
 
 `default_nettype none
 
-/* verilator lint_off PINCONNECTEMPTY */
-
 module tt_um_urish_simon (
     input  wire [7:0] ui_in,    // Dedicated inputs
     output wire [7:0] uo_out,   // Dedicated outputs
@@ -23,6 +21,7 @@ module tt_um_urish_simon (
   wire [1:0] segment_digits;
   wire sound;
   wire clk_sel = ui_in[7];
+  wire clk_ring_osc;
   wire clk_internal;
   wire clk_simon = clk_sel ? clk_internal : clk;
   wire clk_internal_out = clk_sel ? clk_internal : 0;
@@ -35,7 +34,7 @@ module tt_um_urish_simon (
       .CHAIN_LENGTH(13),
       .DIVIDER_BITS(13)  // For ~62.5 KHz output, determined by measuring tt05's tt_um_urish_ringosc_cnt
   ) ring_osc (
-      .clk_out(),
+      .clk_out(clk_ring_osc),
       .clk_out_div(clk_internal)
   );
 
@@ -52,6 +51,6 @@ module tt_um_urish_simon (
   );
 
   // List all unused inputs to prevent warnings
-  wire _unused = &{ena, ui_in[7:5], uio_in, 1'b0};
+  wire _unused = &{ena, ui_in[7:5], uio_in, clk_ring_osc, 1'b0};
 
 endmodule

@@ -3,6 +3,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+/* verilator lint_off UNOPTFLAT */
+
 `default_nettype none (* keep_hierarchy *)
 module inverter (
     input  wire in,

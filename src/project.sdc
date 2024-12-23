@@ -1,8 +1,19 @@
+# Ring oscillator clock
+set rosc_clock_name "clk_ring_osc"
+set rosc_freq_mhz 700
+set rosc_clock_net [get_nets $rosc_clock_name]
+set rosc_port_args [get_pins -of_objects $rosc_clock_net -filter "direction==output"]
+puts "\[INFO] Using ring oscillator clock $rosc_clock_name"
+create_clock {*}$rosc_port_args -name $rosc_clock_name -period [expr 1000 / $rosc_freq_mhz]
+
+# Main clock
 set clock_name "clk_simon"
 set clock_net [get_nets $clock_name]
 set port_args [get_pins -of_objects $clock_net -filter "direction==output"]
 puts "\[INFO] Using clock $clock_name"
 create_clock {*}$port_args -name $clock_name -period $::env(CLOCK_PERIOD)
+
+set_clock_groups -asynchronous -group [get_clocks $rosc_clock_name] -group [get_clocks $clock_name]
 
 set input_delay_value [expr $::env(CLOCK_PERIOD) * $::env(IO_DELAY_CONSTRAINT) / 100]
 set output_delay_value [expr $::env(CLOCK_PERIOD) * $::env(IO_DELAY_CONSTRAINT) / 100]
