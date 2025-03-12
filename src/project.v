@@ -34,6 +34,7 @@ module tt_um_urish_simon (
       .CHAIN_LENGTH(13),
       .DIVIDER_BITS(13)  // For ~62.5 KHz output, determined by measuring tt05's tt_um_urish_ringosc_cnt
   ) ring_osc (
+      .en(clk_sel),
       .clk_out(clk_ring_osc),
       .clk_out_div(clk_internal)
   );
