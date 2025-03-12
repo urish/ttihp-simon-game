@@ -32,7 +32,7 @@ module tt_um_urish_simon (
 
   ring_osc #(
       .CHAIN_LENGTH(13),
-      .DIVIDER_BITS(13)  // For ~62.5 KHz output, determined by measuring tt05's tt_um_urish_ringosc_cnt
+      .DIVIDER_BITS(14)  // For ~55 KHz output, determined simulating the ring oscillator
   ) ring_osc (
       .en(clk_sel),
       .clk_out(clk_ring_osc),
@@ -42,7 +42,7 @@ module tt_um_urish_simon (
   simon simon1 (
       .clk   (clk_simon),
       .rst   (!rst_n),
-      .ticks_per_milli (clk_sel ? 16'd62 : 16'd50),
+      .ticks_per_milli (clk_sel ? 16'd55 : 16'd50),
       .btn   (ui_in[3:0]),
       .led   (led),
       .segments(segments),
