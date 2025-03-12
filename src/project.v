@@ -42,7 +42,7 @@ module tt_um_urish_simon (
   simon simon1 (
       .clk   (clk_simon),
       .rst   (!rst_n),
-      .ticks_per_milli (clk_sel ? 16'd55 : 16'd50),
+      .ticks_per_milli (clk_sel ? 6'd55 : 6'd50),
       .btn   (ui_in[3:0]),
       .led   (led),
       .segments(segments),
